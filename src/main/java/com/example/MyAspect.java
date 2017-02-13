@@ -10,8 +10,10 @@ import org.springframework.stereotype.Component;
 @Aspect
 class MyAspect {
 
-    @Before("execution(public * *(..)) && within(com.example..*))")
+    @Before("execution(public * *(..)) && within(com.example..*) && @target(org.springframework.web.bind.annotation.RestController))")
     public void doSomethingHere(JoinPoint joinPoint) {
+
+        System.out.println("In controller method" + joinPoint.getSignature().toShortString());
     }
 
 }
